@@ -18,19 +18,30 @@ library('pangaear')
 
 ```{r Optional Search for Data}
 #pg_search(query, count = 10, offset = 0, topic = NULL, bbox = NULL, mindate = NULL, maxdate = NULL, ...)
-pg_search(query = 'water', bbox = c(-124.2, 41.8, -116.8, 46.1), count = 3)
+pangaear::pg_search(query = 'water', bbox = c(-124.2, 41.8, -116.8, 46.1), count = 3)
 ```
 
 
 ```{r get data}
-
-dat <- pg_data(doi = '10.1594/PANGAEA.807580')
+doi = "10.1594/PANGAEA.807580"
+dat <- pangaear::pg_data(doi = doi)
 dat[[1]]
 
 ```
+```{r get filename}
+gsub(".")
+
+```
+
+
+
+```{r Open the data}
+rappdirs::user_cache_dir("pangaear")
+list.files(rappdirs::user_cache_dir("pangaear")) # List files in the directory that pangea wrote to. 
+```
 
 ```{r get Metadata}
-pg_list_metadata_formats()
+pangaear::pg_list_metadata_formats()
 
 
 ```
