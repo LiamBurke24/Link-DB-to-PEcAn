@@ -11,38 +11,26 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r download the dev version since }
-install.packages("devtools")
-devtools::install_github('ropensci/pangaear')
 library('pangaear')
 ```
 
 ```{r Optional Search for Data}
 #pg_search(query, count = 10, offset = 0, topic = NULL, bbox = NULL, mindate = NULL, maxdate = NULL, ...)
-pangaear::pg_search(query = 'water', bbox = c(-124.2, 41.8, -116.8, 46.1), count = 3)
+pangaear::pg_search(query = 'fossil pollen', count = 3)
 ```
 
 
 ```{r get data}
-doi = "10.1594/PANGAEA.807580"
+doi = "10.1594/PANGAEA.849667"
 dat <- pangaear::pg_data(doi = doi)
-dat[[1]]
+dat[[1]]$path # get the filepath
 
-```
-```{r get filename}
-gsub(".")
-
+downloaded_data <- as.data.frame(dat[[1]]$data)
+downloaded_data
 ```
 
-
-
-```{r Open the data}
-rappdirs::user_cache_dir("pangaear")
-list.files(rappdirs::user_cache_dir("pangaear")) # List files in the directory that pangea wrote to. 
-```
 
 ```{r get Metadata}
 pangaear::pg_list_metadata_formats()
-
-
 ```
 
